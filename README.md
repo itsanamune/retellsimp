@@ -67,6 +67,61 @@ export RETELL_API_KEY="your-api-key-here"
 
 Get your API key from the [Retell AI Dashboard](https://dashboard.retellai.com/).
 
+### Claude Code Configuration
+
+#### Option 1: Using the CLI (Recommended)
+
+Add the MCP server using the `claude mcp add` command:
+
+```bash
+claude mcp add --transport stdio -e RETELL_API_KEY=your-api-key-here retell-ai -- node /path/to/retell-ai-mcp/dist/index.js
+```
+
+Or if you have `RETELL_API_KEY` set in your environment:
+
+```bash
+claude mcp add --transport stdio -e RETELL_API_KEY retell-ai -- node /path/to/retell-ai-mcp/dist/index.js
+```
+
+You can also use environment variable expansion:
+
+```bash
+claude mcp add --transport stdio -e RETELL_API_KEY=\${RETELL_API_KEY} retell-ai -- node /path/to/retell-ai-mcp/dist/index.js
+```
+
+#### Option 2: Project Configuration File
+
+Create a `.mcp.json` file in your project root to share with your team:
+
+```json
+{
+  "mcpServers": {
+    "retell-ai": {
+      "command": "node",
+      "args": ["/path/to/retell-ai-mcp/dist/index.js"],
+      "env": {
+        "RETELL_API_KEY": "${RETELL_API_KEY}"
+      }
+    }
+  }
+}
+```
+
+The `${RETELL_API_KEY}` syntax will expand the environment variable at runtime.
+
+#### Managing the Server
+
+```bash
+# List configured MCP servers
+claude mcp list
+
+# Get details about the retell-ai server
+claude mcp get retell-ai
+
+# Remove the server
+claude mcp remove retell-ai
+```
+
 ### Claude Desktop Configuration
 
 Add this to your Claude Desktop config file:
@@ -223,4 +278,5 @@ MIT
 
 - [Retell AI Documentation](https://docs.retellai.com)
 - [Retell AI Dashboard](https://dashboard.retellai.com)
+- [Claude Code MCP Documentation](https://code.claude.com/docs/en/mcp)
 - [MCP Protocol](https://modelcontextprotocol.io)
