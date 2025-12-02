@@ -74,19 +74,13 @@ Get your API key from the [Retell AI Dashboard](https://dashboard.retellai.com/)
 Add the MCP server using the `claude mcp add` command:
 
 ```bash
-claude mcp add --transport stdio -e RETELL_API_KEY=your-api-key-here retell-ai -- node /path/to/retell-ai-mcp/dist/index.js
-```
-
-Or if you have `RETELL_API_KEY` set in your environment:
-
-```bash
-claude mcp add --transport stdio -e RETELL_API_KEY retell-ai -- node /path/to/retell-ai-mcp/dist/index.js
+claude mcp add --transport stdio retell-ai -e RETELL_API_KEY=your-api-key-here -- node /path/to/retell-ai-mcp/dist/index.js
 ```
 
 You can also use environment variable expansion:
 
 ```bash
-claude mcp add --transport stdio -e RETELL_API_KEY=\${RETELL_API_KEY} retell-ai -- node /path/to/retell-ai-mcp/dist/index.js
+claude mcp add --transport stdio retell-ai -e RETELL_API_KEY=\${RETELL_API_KEY} -- node /path/to/retell-ai-mcp/dist/index.js
 ```
 
 #### Option 2: Project Configuration File
